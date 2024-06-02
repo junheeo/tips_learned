@@ -1,6 +1,6 @@
 # tips_learned
 
-# Installing a Vim that supports Python 3 - MACOS
+## Installing a Vim that supports Python 3 - MACOS
 //we get error installing vim
 % brew install vim
 ...

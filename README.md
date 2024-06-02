@@ -1,7 +1,8 @@
 # tips_learned
 
 ## Installing a Vim that supports Python 3 - MACOS
-//we get error installing vim
+- we get error installing vim
+
 % brew install vim
 ...
 Could not symlink share/man/de/man1/ex.1
@@ -11,24 +12,30 @@ You can try again using:
   brew link vim
 ...
 
-//then if we try
+- then if we try
+
 % brew link vim
 Linking /usr/local/Cellar/vim/8.2.0750... 
 Error: Could not symlink share/man/de/man1/ex.1
 /usr/local/share/man/de/man1 is not writable.
 
-//this is solved by
+- this is solved by
+
 % sudo chown -R $(whoami) /usr/local/share
 
-//also make sure that
-% echo $PATH
-//shows /usr/local/bin BEFORE /usr/bin
-//if not, edit ~/.vimrc OR /etc/paths AND THEN reopen terminal
+- also make sure that
 
-//to check if the downloaded vim is properly called:
+% echo $PATH
+- shows /usr/local/bin BEFORE /usr/bin
+
+- if not, edit ~/.vimrc OR /etc/paths AND THEN reopen terminal
+
+- to check if the downloaded vim is properly called:
+
 % which vim
 /usr/local/bin/vim
-//should be the output
+
+- should be the output
 
 % vim --version
 VIM - Vi IMproved 9.1 (2024 Jan 02, compiled May 30 2024 05:52:44)

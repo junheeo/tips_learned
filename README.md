@@ -97,6 +97,36 @@ Huge version without GUI.  Features included (+) or not (-):
        defaults file: "$VIMRUNTIME/defaults.vim"
   fall-back for $VIM: "/usr/local/share/vim"
 
+  
+
 - +python3 : so our vim now has python3 support
 
-#
+## installing autocompleters with YouCompleteMe
+at directory: /Users/username/.vim/bundle/YouCompleteMe
+
+
+YouCompleteMe % python3 install.py --all
+
+Generating ycmd build configuration...OK
+
+Compiling ycmd target: ycm_core...OK
+
+Building regex module...OK
+
+Building watchdog module...OK
+
+Installing Omnisharp for C# support...OK
+
+Building gopls for go completion...OK
+
+Setting up Tern for JavaScript completion...OK
+
+Installing rust-analyzer "nightly-2023-08-18" for Rust support...OK
+
+Installing jdt.ls for Java support...OK
+
+Setting up TSserver for TypeScript completion...OK
+
+Setting up Clangd completer...OK
+
+

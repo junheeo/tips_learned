@@ -432,4 +432,4 @@ Hey Zeus!
 
 should be printed as accordingly to our main() function.
 
-OLAS is the project name that we defined in the CMakeLists.txt previously hence the executable name is OLAS.
+OLAS is the project name that we defined in the CMakeLists.txt previously hence the executable name is OLAS. This is due to setting add_executable(${PROJECT_NAME} main.cpp) in CMakeLists.

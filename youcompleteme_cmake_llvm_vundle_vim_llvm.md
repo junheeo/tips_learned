@@ -42,7 +42,7 @@ and if /usr/local/bin appears before /usr/bin, then you are good to go to the ne
 If /usr/bin appears before /usr/local/bin then consult other sources and make it work (find other .zprofile, .zshenv, ... and edit PATH varible)
 
 
-___________________________________
+### few tips for vim
 
 to make vim perform syntaxcoloring, add
 
@@ -68,7 +68,7 @@ endif
 
 to .vimrc
 
-__________________________________
+
 ## install llvm
 since apple clang seems to quirky and since apple provided ld linker seems to not work properly, we should install llvm (include clang, clang++, ...)
 

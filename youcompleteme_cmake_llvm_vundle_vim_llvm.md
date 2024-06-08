@@ -502,3 +502,7 @@ then use the same cmake and make comamnds as above
 cmake -S . -B out/build -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 make -C out/build
+
+and run code with
+
+% ./out/build/OLAS

@@ -433,3 +433,72 @@ Hey Zeus!
 should be printed as accordingly to our main() function.
 
 OLAS is the project name that we defined in the CMakeLists.txt previously hence the executable name is OLAS. This is due to setting add_executable(${PROJECT_NAME} main.cpp) in CMakeLists.
+
+_________________________________
+HOW TO INCLUDE .H AND .CPP FILES IN THE TOP DIRECTORY PARALLEL TO MAIN.CPP
+
+Let's say 
+
+OURLORDANDSAVIOR % ls
+
+Adder                 main.cpp              tester.h
+
+CMakeLists.txt        out
+
+compile_commands.json tester.cpp
+
+you are at OURLORDANDSAVIOR directory and you have tester.h and tester.cpp that you want to include in main.cpp file. Suppose
+
+tester.h
+_______________________________
+void tester ();
+_______________________________
+tester.cpp
+_______________________________
+#include <iostream>
+
+#include tester.h
+
+void tester () {
+
+std::cout << "tester check" << std::endl;
+
+}
+_______________________________
+
+and change the main file:
+
+main.cpp
+_______________________________
+#include <iostream>
+
+#include "adder.h"
+
+#include "tester.h"
+
+int main () {
+
+std::cout << "Hey, Zeus" << std::endl;
+
+std::cout << add(72.1f, 73.8f << std::endl;
+
+tester();
+
+return 0;
+
+}
+_______________________________
+
+then in CMakeLists.txt (right below the OURLORDANDSAVIOR directory), change 
+
+add_executable(${PROJECT_NAME} main.cpp)
+
+to
+
+add_executable(${PROJECT_NAME} main.cpp tester.h tester.cpp)
+
+then use the same cmake and make comamnds as above
+
+cmake -S . -B out/build -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+make -C out/build

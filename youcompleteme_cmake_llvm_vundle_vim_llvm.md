@@ -42,7 +42,7 @@ and if /usr/local/bin appears before /usr/bin, then you are good to go to the ne
 If /usr/bin appears before /usr/local/bin then consult other sources and make it work (find other .zprofile, .zshenv, ... and edit PATH varible)
 
 
-### few tips for vim
+### a few tips for vim
 
 to make vim perform syntaxcoloring, add
 

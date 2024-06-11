@@ -131,7 +131,11 @@ Setting up Clangd completer...OK
 
 
 ## i7-2600K and GTX 900 series
-x86-64 operating system works on i7-6700k  
+x86-64 operating system works on i7-2700k  
+Sandy Bridge (intel 2nd gen) CPUs' motherboard may have stepping issue(SATA 0,1 works fine, but not the rest, can damage entire board)
+B75 chipset mainboards do not have sandy bridge chipset stepping issue from the start so no need to see if stepping is applied.  
+This is a B75 chipset mainboard:  
+https://mitem.gmarket.co.kr/Item?goodsCode=2381177529&PARTNERSHIP=eyJfcm1jZ3VpZCI6IjExNzE3ODkyODkyODY2MDAwNDcyMDAwMDAwIiwiX3JtcGd1aWQiOiIyMTcxNzg5Mjg5Mjg2NjAwMDQ3MjAxMDAwMCIsImphZWh1aWQiOiIyMDAwMTU0NDgifQ&appgate_guid=638535223142078475-75428d9d-034f-4102-9576-6470d7ea64da  
 
 gtx 900 series graphics card drivers do get installed  
 https://forums.developer.nvidia.com/t/drivers-for-geforce-gtx-970-installed-but-no-display-output-on-ubuntu-22-04/290969  

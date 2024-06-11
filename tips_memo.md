@@ -136,6 +136,8 @@ x86-64 operating system works on i7-6700k
 gtx 900 series graphics card drivers do get installed  
 https://forums.developer.nvidia.com/t/drivers-for-geforce-gtx-970-installed-but-no-display-output-on-ubuntu-22-04/290969  
 probably using  ubuntu-drivers autoinstall  
+seems like most recent nvidia driver supports gtx 900 series:  
+https://www.nvidia.co.kr/Download/driverResults.aspx/211911/kr  
 how to:  
 https://gist.github.com/charleslouis/088289d94023b9386799  
 

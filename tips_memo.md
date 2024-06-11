@@ -130,7 +130,7 @@ Setting up TSserver for TypeScript completion...OK
 Setting up Clangd completer...OK
 
 
-_______________________________________
+## i7-2600K and GTX 900 series
 x86-64 operating system works on i7-6700k  
 
 gtx 900 series graphics card drivers do get installed  
@@ -145,4 +145,52 @@ seems like the latest CUDA toolkit supports maxwell (gtx 900 series)
 https://docs.nvidia.com/cuda/archive/12.4.1/  
 and Ubuntu version should be Ubuntu 22.04.z (z <= 3) LTS or Ubuntu 20.04.z (z <= 6) LTS  
 https://docs.nvidia.com/cuda/archive/12.4.1/cuda-installation-guide-linux/index.html  
+
+## compiling with g++
+suppose the project directory:  
+.  
+|-main.cpp  
+|-message.cpp  
+|-message.h  
+
+compiling as object(.o)file:  
+    g++ -c main.cpp -o main.o  
+    g++ -c message.cpp -o message.o  
+  
+linking objects into single executable  
+    g++ main.o message.o -o my_program  
+
+run executable  
+    ./my_program  
+
+<main.cpp>
+#include <iostream>  
+  
+// Declaration of the function in another file  
+void printMessage();  
+  
+int main() {  
+  printMessage();  
+  return 0;  
+}  
+__________________________  
+<message.cpp>  
+#include <iostream>  
+  
+// Definition of the function  
+void printMessage() {  
+  std::cout << "Hello from another file!" << std::endl;  
+}  
+_________________________
+<message.h>  
+#ifndef MESSAGE_H  
+#define MESSAGE_H  
+  
+// Declaration of the function  
+void printMessage();  
+  
+#endif // MESSAGE_H  
+__________________________
+
+written by Chat-GPT  
 

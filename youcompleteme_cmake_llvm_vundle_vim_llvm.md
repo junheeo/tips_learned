@@ -70,7 +70,7 @@ to .vimrc
 
 
 ## install llvm
-since apple clang seems to quirky and since apple provided ld linker seems to not work properly, we should install llvm (include clang, clang++, ...)
+since [apple clang seems to quirky](https://www.reddit.com/r/cpp_questions/comments/moirt4/apple_clang_vs_clang/) and since apple provided ld linker seems to not work properly, we should install llvm (include clang, clang++, ...)
 
 installing llvm has dependency python3.12. If you do
 

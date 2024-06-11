@@ -130,3 +130,17 @@ Setting up TSserver for TypeScript completion...OK
 Setting up Clangd completer...OK
 
 
+_______________________________________
+x86-64 operating system works on i7-6700k  
+
+gtx 900 series graphics card drivers do get installed  
+https://forums.developer.nvidia.com/t/drivers-for-geforce-gtx-970-installed-but-no-display-output-on-ubuntu-22-04/290969  
+probably using  ubuntu-drivers autoinstall  
+how to:  
+https://gist.github.com/charleslouis/088289d94023b9386799  
+
+seems like the latest CUDA toolkit supports maxwell (gtx 900 series)  
+https://docs.nvidia.com/cuda/archive/12.4.1/  
+and Ubuntu version should be Ubuntu 22.04.z (z <= 3) LTS or Ubuntu 20.04.z (z <= 6) LTS  
+https://docs.nvidia.com/cuda/archive/12.4.1/cuda-installation-guide-linux/index.html  
+

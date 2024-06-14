@@ -15,7 +15,7 @@ TestCmakeDir % vim CMakeLists.txt
 
 <CmakeLists.txt>  
 cmake_minimum_required(VERSION 3.29)  #check you cmake version  
-project(OURPROJECT             #create project with project name PROJECT  
+project(OURPROJECT             #create project with project name OURPROJECT  
         LANGUAGES CXX)  
   
  
@@ -78,7 +78,7 @@ TestCmakeDir % vim CMakeLists.txt
 
 <CMakeLists.txt>  
 cmake_minimum_required(VERSION 3.29)  #check you cmake version  
-project(OURPROJECT             #create project with project name PROJECT  
+project(OURPROJECT             #create project with project name OURPROJECT  
         LANGUAGES CXX)  
   
 #C: C  
@@ -146,7 +146,7 @@ TestCmakeDir % vim CMakeLists.txt
 
 <CMakeLists.txt>  
 cmake_minimum_required(VERSION 3.29)  #check you cmake version  
-project(OURPROJECT             #create project with project name PROJECT  
+project(OURPROJECT             #create project with project name OURPROJECT  
         LANGUAGES CXX)  
   
 #C: C  

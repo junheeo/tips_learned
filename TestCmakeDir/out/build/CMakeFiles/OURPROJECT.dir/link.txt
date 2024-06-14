@@ -1,0 +1,1 @@
+/usr/local/opt/llvm/bin/clang++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/OURPROJECT.dir/main.cpp.o CMakeFiles/OURPROJECT.dir/a.cpp.o -o OURPROJECT  Lv1b/libB_LIBRARY.a Lv1c/Lv2c/libC_LIBRARY.a

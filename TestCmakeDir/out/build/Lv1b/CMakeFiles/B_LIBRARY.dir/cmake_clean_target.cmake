@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libB_LIBRARY.a"
+)

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libC_LIBRARY.a CMakeFiles/C_LIBRARY.dir/c.cpp.o CMakeFiles/C_LIBRARY.dir/c_helper.cpp.o
+/usr/local/opt/llvm/bin/llvm-ranlib libC_LIBRARY.a

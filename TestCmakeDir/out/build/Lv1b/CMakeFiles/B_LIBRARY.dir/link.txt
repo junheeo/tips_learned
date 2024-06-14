@@ -1,0 +1,2 @@
+/usr/bin/ar qc libB_LIBRARY.a CMakeFiles/B_LIBRARY.dir/b.cpp.o
+/usr/local/opt/llvm/bin/llvm-ranlib libB_LIBRARY.a

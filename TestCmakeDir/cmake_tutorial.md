@@ -144,7 +144,7 @@ Lv2c % cd ../../
 TestCmakeDir % vim CMakeLists.txt 
 ``` 
 
-<CMakeLists.txt>
+<CMakeLists.txt>  
 cmake_minimum_required(VERSION 3.29)  #check you cmake version  
 project(OURPROJECT             #create project with project name PROJECT  
         LANGUAGES CXX)  
@@ -169,7 +169,7 @@ target_link_libraries_(${PROJECT_NAME}
 TestCmakeDir % vim main.cpp 
 ```
 
-<main.cpp>
+<main.cpp>  
 #include "a.h"   
 #include "b.h"
 #include "c.h"

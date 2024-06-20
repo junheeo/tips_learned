@@ -6,6 +6,14 @@ macOS Sonoma 14.4.1
     %cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py ~/.vim  
 previously right after installation of cmake  
 )  
+```
+% vim ~/.vim/.ycm_extra_conf.py
+```
+Go to line 102. set compilation database folder to be the current directory:  
+```
+compilation_database_folder='./'
+```
+So now clangd (c/c++/objc/cuda static analyzer/parser) will look at the directory where .ycm_extra_config.py file is at and read the database folder compile_commands.json file to parse properly across different folders. We will place .ycm_extra_config.py at the top folder of the project and will link compile_commands.json at the top folder of the project.  
   
 ```
 % mkdir TestCmakeDir

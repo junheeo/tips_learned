@@ -1,0 +1,5 @@
+add_executable(Anna main.cpp)
+add_subdirectory(lv1a)
+add_subdirectory(lv1b)
+target_include_directories(blib PUBLIC lv1b)
+target_link_libraries(Anna PRIVATE alib blib)

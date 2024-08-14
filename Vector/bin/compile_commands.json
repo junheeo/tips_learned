@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/junheeoh/Code/cpp_tutorial/cmake_practice/Vector/bin/src/test",
-  "command": "/usr/local/opt/llvm/bin/clang++  -I/Users/junheeoh/Code/cpp_tutorial/cmake_practice/Vector/src/test/vector -I/Users/junheeoh/Code/cpp_tutorial/cmake_practice/Vector/src/vector/. -std=gnu++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -o CMakeFiles/Test_Vector.dir/main.cpp.o -c /Users/junheeoh/Code/cpp_tutorial/cmake_practice/Vector/src/test/main.cpp",
-  "file": "/Users/junheeoh/Code/cpp_tutorial/cmake_practice/Vector/src/test/main.cpp",
-  "output": "src/test/CMakeFiles/Test_Vector.dir/main.cpp.o"
-}
-]

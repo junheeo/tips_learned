@@ -133,12 +133,18 @@ Skiplist<T>::Skiplist() {
     std::cout<<"Skiplist: success constructing"<<std::endl;
 }
 
-/*
 template<typename T>
 Skiplist<T>::~Skiplist() {
-    
+    Skiplist<T>::Node * pCurrNode = pHeader;
+    Skiplist<T>::Node * pNextNode;
+    while(pCurrNode != nullptr) {
+        pNextNode = (*pCurrNode)[0];
+        delete pCurrNode;
+        pCurrNode = pNextNode;
+    }
+    pHeader = nullptr;
+    pSentinel = nullptr;
 }
-*/
 
 template<typename T>
 void Skiplist<T>::print_keys() {

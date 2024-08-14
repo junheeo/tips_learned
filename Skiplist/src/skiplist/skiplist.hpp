@@ -60,7 +60,7 @@ private:
 
 public:
     Skiplist();
-    /* ~Skiplist(); */
+    ~Skiplist();
 
     void print_keys();
     void print_Nodes();

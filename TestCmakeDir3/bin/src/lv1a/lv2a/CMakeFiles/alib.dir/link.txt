@@ -1,2 +1,0 @@
-/usr/bin/ar qc libalib.a CMakeFiles/alib.dir/alib.cpp.o
-/usr/local/opt/llvm/bin/llvm-ranlib libalib.a

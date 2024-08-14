@@ -1,0 +1,282 @@
+template<typename T>
+void Skiplist<T>::insertBetween(Skiplist<T>::Node* pFrontNode, Skiplist<T>::Node* pBackNode, Skiplist<T>::Node* pNodeToInsert) {
+    /* REQUIRES(1): (*pFrontNode)[0] = pBackNode; */
+    /* REQUIRES(2): height of all nodes in skiplist <= (height of sentinel == height of header) */
+    std::cout<<"        entered insertBetween(pFrontNode, pBackNode, pNodeToInsert)"<<std::endl;
+    std::cout<<"        pFrontNode "<<pFrontNode<<std::endl;
+    std::cout<<"        pBackNode "<<pBackNode<<std::endl;
+    std::cout<<"        pNodeToInsert"<<pNodeToInsert<<std::endl;
+    std::cout<<"        pFrontNode->levels() "<<pFrontNode->levels()<<std::endl;
+    std::cout<<"        pBackNode->levels() "<<pBackNode->levels()<<std::endl;
+    std::cout<<"        pNodeToInsert->levels()"<<pNodeToInsert->levels()<<std::endl;
+    size_t frontNodeTopConnectLevel;
+    if(pFrontNode->levels() <= pNodeToInsert->levels()) {
+        /* case pFrontNode is shorter than pNodeToInsert */
+        frontNodeTopConnectLevel = pFrontNode->levels() - 1;
+        /*       []
+         * []--->[]
+         * front insert */
+    } else {
+        /* pFrontNode->levels() > pNodeToInsert->levels() */
+        /* case pFrontNode is taller than pNodeToInsert */
+        frontNodeTopConnectLevel = pNodeToInsert->levels() - 1;
+        /* []
+         * []--->[]
+         * front insert */
+    }
+    std::cout<<"        frontNodeTopConnectLevel "<<frontNodeTopConnectLevel<<std::endl;
+    /* start update where pFrontNode points to */
+    for(int i = frontNodeTopConnectLevel; i >= 0; --i) {
+        (*pFrontNode)[i] = pNodeToInsert;
+        std::cout<<"        loop1 "<<i<<std::endl;
+        /* in the case of pFrontNode->levels() > frontNodeTopConnectLevel
+         * pFrontNode->listToNext in the range 
+         * [frontNodeTopConnectLevel + 1, pFrontNode->levels())   <- [include,exclude) 
+         * are ALREADY connected to the nodes to the right of which it should be connected with 
+         * therefore no need to change (*pFrontNode)[i] for i >= frontNodeTopConnectLevel+1; */
+        /* []-------------->[]
+         * []--->[]-->   -->[]
+         * front insert ...   */
+    }
+    /* finish pFrontNode update */
+    size_t insertNodeTopLevel = (*pNodeToInsert).levels() - 1;
+    size_t backNodeTopLevel = (*pBackNode).levels() - 1;
+    /* start update where pNodeToInsert points to */
+    if(insertNodeTopLevel <= backNodeTopLevel) {
+        /* pNodeToInsert is shorter than pBackNode */
+        /* all of pNodeToInsert->listToNext (private) should point to pBackNode */
+        for(size_t i = insertNodeTopLevel; i >= 0; --i) {
+            std::cout<<"        loop2 "<<i<<std::endl;
+            (*pNodeToInsert)[i] = pBackNode;
+            if(i==0){
+                break;
+            }
+        }
+    } else {
+        /* insertNodeTopLevel > backNodeTopLevel */
+        /* pNodeToInsert is taller than pBackNode */
+        /* PART(1):
+         *     pNodeToInsert->listToNext (private) only in the range 
+         *     [0, backNodeTopLevel+1)
+         *     should point to pBackNode.
+         * PART(2):
+         *     pNodeToInsert->listToNext (private) in the range
+         *     [backNodeTopLevel, pNodeToInsert.levels())
+         *     should point to Nodes beyond pNodeToInsert which are taller */
+        /* start PART(1)*/
+        for(size_t i = backNodeTopLevel; i>=0; --i) {
+            (*pNodeToInsert)[i] = pBackNode;
+            /* []
+             * []---->[]
+             * insert back */
+            if(i==0){
+                break;
+            }
+        }
+        /* end PART(1)*/
+        size_t insertNodeStartLinkLevel = backNodeTopLevel + 1;
+        /* since insertNodeTopLevel > backNodeTopLevel 
+         *       insertNodeTopLevel >= backNodeTopLevel + 1 
+         * hence insertNodeTopLevel >= insertNodeStartLinkLevel */
+        Skiplist<T>::Node* pCurrNode = (*pBackNode)[backNodeTopLevel];
+        size_t currNodeTopLevel;
+        /* assert currNodeTopLevel <= pSentinel->levels() - 1; */
+        while(insertNodeStartLinkLevel <= insertNodeTopLevel) {
+            /* loop_invariant insertNodeTopLevel (constant) */
+            std::cout<<"        inside while(insertNodeStartLinkLevel <= insertNodeTopLevel);"<<std::endl;
+            currNodeTopLevel = (pCurrNode->levels()) - 1;
+            /* THM ^this currNodeTopLevel update will never be invalid 
+             * i.e. pCurrNode != nullptr because 
+             * CASE(pCurrNode == pSentinel):
+             *     PREVIOUS_ITER:
+             *     prev_currNodeTopLevel = prev_pCurrNode->levels() -1
+             *     prev_insertNodeStartLinkLevel = prev_currNodeTopLevel + 1
+             *     SUPPOSE
+             *         prev_insertNodeStartLinkLevel < insertNodeTopLevel
+             *         yet.
+             *     pCurrNode = (*prev_pCurrNode)[prev_currNodeTopLevel]   updated by end of loop
+             *               == pSentinel  by CASE condition
+             *
+             *     insertNodeStartLinkLevel = prev_currNodeTopLevel + 1;  updated
+             *     insertNodeStartLinkLevel <= insertNodeTopLevel  by loop condition
+             *                                                             (assume next loop occurred)
+             *     CURRENT_ITER:
+             *     currNodeTopLevel = pCurrNode->levels() - 1   update, pCurrNode was updated in prev loop
+             *                      == pSentinel->levels() - 1
+             *     next_insertNodeStartLinkLevel = currNodeTopLevel + 1
+             *                                   == pSentinel->levels()  by previous line
+             *     next_insertNodeTopLevel + 1 <= pSentinel->levels() by REQUIRES(2) 
+             *     therefore
+             *     next_insertNodeTopLevel < pSentinel->levels()
+             *     therefore
+             *     next_insertNodeStartLinkLevel > next_insertNodeTopLevel
+             *
+             *     also next_pCurrNode = (*pCurrNode)[currNodeTopLevel]
+             *                         == nullptr
+             *
+             *     therefore the loop ends and nullptr.level() do not happen
+             *     therefore (currNodeTopLevel = pCurrNode->levels() - 1 is always valid */
+            if(currNodeTopLevel > insertNodeStartLinkLevel) {
+                for(size_t i = insertNodeStartLinkLevel; i <= currNodeTopLevel; ++i) {
+                    (*pNodeToInsert)[i] = pCurrNode;
+                }
+                insertNodeStartLinkLevel = currNodeTopLevel + 1;
+            }
+            pCurrNode = (*pCurrNode)[currNodeTopLevel]; /* go find higher node to the left */
+            /*                 []
+             * []------------->[] 
+             * []       []     []
+             * currNode       next_currNode(might be higher than currNode */
+        }
+    }
+}
+
+
+
+
+
+template<typename T>
+void Skiplist<T>::insertImpl(Skiplist<T>::Node* pCurrNode, Skiplist<T>::Node* pNodeToInsert, size_t topLevel) {
+    /* REQUIRES: topLevel < allowedMaxLevel; */
+    std::cout<<"    enter insertImpl(pCurrNode, pNodeToInsert, topLevel)"<<std::endl;
+    std::cout<<"    topLevel: "<<topLevel<<"  indices "<<0<<" ~ "<<topLevel<<std::endl;
+    std::cout<<"    pCurrNode->levels() "<<pCurrNode->levels()<<std::endl;
+    Skiplist<T>::Node* pNextNode;
+    for(size_t inx = topLevel; inx >= 0; --inx) {
+        std::cout<<"    loop inx: "<<inx<<std::endl;
+
+        pNextNode = (*pCurrNode)[inx];
+        if(pNextNode == pSentinel) {
+            std::cout<<"    pNextNode == pSentinel"<<std::endl;
+            /*throw std::runtime_error("X");*/
+            if(inx==0) {
+                break;
+            }
+            continue;
+        }
+        if(pNextNode->key < pNodeToInsert->key) {
+            try{
+                std::cout<<"    pNextNode->key < pNodeToInsert->key"<<std::endl;
+                insertImpl(pNextNode, pNodeToInsert, inx);
+            }
+            catch(std::runtime_error const& e) {
+                std::cout<<"    insertImpl runtime_error "<<e.what()<<std::endl;
+                if((e.what())[0] == 'X') {
+                    std::cout<< "   (e.what())[0] == 'X'"<<std::endl;
+                    if(inx==0) {
+                        break;
+                    }
+                    continue;
+                } else {
+                    std::cout<<"    (e.what())[0] != 'X'"<<std::endl;
+                    throw std::runtime_error("O");
+                    return;
+                }
+            }
+        } else {
+            /* assert pNextNode->key >= pNodeToInsert->key */
+            std::cout<<"    pNextNode->key >= pNodeToInsert->key"<<std::endl;
+            throw std::runtime_error("X");
+        }
+        if(inx==0){
+            break;
+        }
+    }
+    /*Skiplist<T>::Node* pFrontNode = pNextNode;
+    Skiplist<T>::Node* pBackNode = (*pNextNode)[0];*/
+    Skiplist<T>::Node* pFrontNode = pCurrNode;
+    Skiplist<T>::Node* pBackNode = pNextNode;
+    std::cout<<"    call insertBetween(pFrontNode, pBackNode, pNodeToInsert)"<<std::endl;
+    insertBetween(pFrontNode, pBackNode, pNodeToInsert);
+    throw std::runtime_error("O");
+    return;
+}
+
+
+
+
+
+
+
+
+
+/*
+template<typename T>
+bool Skiplist<T>::isNextNodeSentinel(Skiplist<T>::Node * pCurrNode) {
+    Skiplist<T>::Node pNextNode = (*pCurrNode)[0];
+    if(pNextNode == pSentinel) {
+        return true;
+    } else {
+        return false;
+    }
+}
+*/
+
+template<typename T>
+void Skiplist<T>::insert(T __key) {
+    /* REQUIRES: pHeader->levels() == allowedMaxLevel - 1; 
+     *           pSentinel->levels() == allowedMaxLevel - 1; */
+    std::cout<<"enter Skiplist<T>::insert()"<<std::endl;
+    std::cout<<"allowedMaxLevel"<<allowedMaxLevel<<std::endl;
+
+
+    size_t thisNodeLevels = 1;
+    bool doContinue = true;
+    while(doContinue) {
+        std::cout<<"continuing to flip coins"<<std::endl;
+        if(flipcoin()){
+            ++thisNodeLevels;
+        } else {
+            doContinue = false;
+        }
+        if(thisNodeLevels == allowedMaxLevel) {
+            ++allowedMaxLevel;
+            doContinue = false;
+        }
+    }
+
+    /*
+    size_t thisNodeLevels = 5;
+    allowedMaxLevel = 6;
+    */
+    
+    std::cout<<"thisNodeLevels "<<thisNodeLevels<<std::endl;
+    std::cout<<"insert(T): try Node() constructor"<<std::endl;
+    Skiplist<T>::Node * pNode = new typename Skiplist<T>::Node::Node(*this, thisNodeLevels, __key);
+    std::cout<<"insert(T): success creating new node to insert"<<std::endl;
+    std::cout<<"node to insert info: "<<std::endl;
+    std::cout<<"*   pNode->levels(): "<<pNode->levels()<<std::endl;
+    std::cout<<"*   pHeader->levels(): "<<pHeader->levels()<<std::endl;
+    /* finished creating the node to be inserted */
+    
+    const size_t targetHeaderMaxLevel = allowedMaxLevel;
+    std::cout<<"targetHeaderMaxLevel "<<targetHeaderMaxLevel<<std::endl;
+    /* pHeader->levels() == pSentinel->levels() by REQ */
+    while(pHeader->levels() < targetHeaderMaxLevel-1) {
+        /* loop_invariant pHeader->skiplist.allowedMaxLevel (constant) */
+        std::cout<<"while(pHeader->levels() < targetHeaderMaxLevel)"<<std::endl;
+        pHeader->addLevel(1);
+        std::cout<<"*  pHeader->levels() "<<pHeader->levels()<<std::endl;
+        std::cout<<"*  targetHeaderMaxLevel "<<targetHeaderMaxLevel<<std::endl;
+        (*pHeader)[pHeader->levels() - 1] = pSentinel;
+        pSentinel->addLevel(1);
+        /* default values in listToNext by addLevel(): nullptr */
+    }
+    /* pHeader->levels() == targetHeaderMaxLevel */
+    std::cout<<"exit while loop"<<std::endl;
+
+    std::cout<<"allowedMaxLevel "<<allowedMaxLevel<<std::endl;
+    std::cout<<"call: insertImpl(pHeader, pNode, allowedMaxLevel - 2)"<<std::endl;
+    try{
+        insertImpl(pHeader, pNode, allowedMaxLevel - 2);
+    }
+    catch(std::runtime_error const & e) {
+        std::cout<<"runtimeerror e.what() "<<e.what()<<std::endl;
+        if((e.what())[0] == 'O') {
+            return;
+        } else {
+            std::cout<<"something's wrong with exception throw"<<std::endl;
+        }
+    }
+    return;
+}

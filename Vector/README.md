@@ -15,8 +15,12 @@ ln -s ./bin/compile_commands.json ./
 ```
 
 Whenever rebuilding CMake files and recompiling the code, run on the command line
+(In case you are using Homebrew llvm clang++ add
 ```
 export CXX=/usr/local/opt/llvm/bin/clang++
+```
+at the front)
+```
 cmake -S . -B bin
 cmake --build bin
 ```
